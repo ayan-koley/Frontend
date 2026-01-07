@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root layout helpers */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Smooth transitions for theme */
+:root {
+  color-scheme: light dark;
+}
+
+* {
+  @apply transition-colors duration-200;
+}
