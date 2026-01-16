@@ -5,9 +5,11 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useAuth } from "../hooks/useAuth.js";
 import ThemeToggle from "./ThemeToggle.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
   return (
     <AppBar
       position="sticky"
@@ -16,7 +18,7 @@ export default function Navbar() {
       sx={{ borderBottom: 1, borderColor: "divider" }}
     >
       <Toolbar>
-        <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 600 }}>
+        <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 600 }} className="cursor-pointer" onClick={() => navigate("/")}>
           URL Shortener
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>

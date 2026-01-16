@@ -14,8 +14,9 @@ export default function App() {
   const isDashboard = ["/dashboard", "/analytics"].includes(location.pathname);
 
   return (
-    <div className="min-h-full bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100">
-      {!isAuthPage && <Navbar />}
+    <div className="dark:bg-white text-neutral-900 dark:text-neutral-100">
+      <Navbar />
+      {!isAuthPage}
       <div className="flex">
         {isDashboard && <Sidebar />}
         <main className={isDashboard ? "flex-1 p-4 sm:p-6" : "w-full"}>

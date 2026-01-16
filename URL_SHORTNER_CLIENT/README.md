@@ -41,6 +41,7 @@ Open the printed local URL to view the app.
 
 - `VITE_API_BASE_URL` – backend base URL
 - `VITE_USE_MOCK` – set to `true` to use local mock services
+- `VITE_GITHUB_OAUTH_URL` – full URL to your backend GitHub OAuth start endpoint (e.g. `https://api.example.com/api/v1/auth/github`) used by the Login page button
 
 ## Security & Best Practices
 

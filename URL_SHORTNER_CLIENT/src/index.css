@@ -10,9 +10,13 @@ body,
 }
 
 /* Smooth transitions for theme */
-:root {
-  color-scheme: light dark;
+/* :root {
+  color-scheme: light;
 }
+
+html.dark {
+  color-scheme: dark;
+} */
 
 * {
   @apply transition-colors duration-200;
