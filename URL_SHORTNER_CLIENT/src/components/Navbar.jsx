@@ -26,7 +26,7 @@ export default function Navbar() {
           {isAuthenticated ? (
             <>
               <Typography variant="body2" sx={{ mr: 1 }}>
-                {user?.name || user?.email}
+                {user?.fullName || user?.email}
               </Typography>
               <Button variant="outlined" onClick={logout}>
                 Logout

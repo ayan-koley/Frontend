@@ -76,7 +76,7 @@ export default function Dashboard() {
 
   return (
     <Box className="space-y-6">
-      <Paper sx={{ p: 3 }} elevation={0}>
+      <Paper sx={{ p: 3 }} elevation={0} >
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
           Create Short URL
         </Typography>
@@ -130,6 +130,7 @@ export default function Dashboard() {
                       className="text-brand"
                       href={`http://localhost:4000/${u.shortCode}`}
                       rel="noreferrer"
+                      target="blank"
                     >
                       {`http://localhost:4000/${u.shortCode}`}
                     </a>

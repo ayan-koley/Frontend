@@ -4,13 +4,13 @@ import InsightsIcon from "@mui/icons-material/Insights";
 
 export default function Sidebar() {
   return (
-    <aside className="hidden sm:block w-60 border-r border-neutral-200 dark:border-neutral-800 min-h-[calc(100vh-64px)]">
+    <aside className="hidden sm:block w-60 border-r border-neutral-200 dark:border-neutral-800 min-h-[calc(100vh-64px)] bg-white dark:bg-gray-800">
       <nav className="p-4 space-y-2">
         <NavLink
           to="/dashboard"
           className={({ isActive }) =>
-            `flex items-center gap-2 px-3 py-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 ${
-              isActive ? "bg-neutral-100 dark:bg-neutral-800 font-medium" : ""
+            `flex items-center gap-2 px-3 py-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-900 ${
+              isActive ? "bg-neutral-100 dark:bg-black font-medium" : ""
             }`
           }
         >
@@ -19,8 +19,8 @@ export default function Sidebar() {
         <NavLink
           to="/analytics"
           className={({ isActive }) =>
-            `flex items-center gap-2 px-3 py-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 ${
-              isActive ? "bg-neutral-100 dark:bg-neutral-800 font-medium" : ""
+            `flex items-center gap-2 px-3 py-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-900 ${
+              isActive ? "bg-neutral-100 dark:bg-black font-medium" : ""
             }`
           }
         >

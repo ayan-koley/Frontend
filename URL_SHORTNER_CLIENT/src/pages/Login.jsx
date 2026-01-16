@@ -94,7 +94,7 @@ export default function Login() {
             variant="contained"
             fullWidth
             startIcon={<GitHubIcon />}
-            // disabled={!GITHUB_OAUTH_URL}
+            disabled={!GITHUB_OAUTH_URL}
             sx={{
               mb: 2,
               bgcolor: "#111827",

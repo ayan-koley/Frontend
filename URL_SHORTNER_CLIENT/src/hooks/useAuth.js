@@ -18,5 +18,7 @@ export function useAuth() {
 
   const logout = () => dispatch(logoutAction());
 
-  return { accessToken, user, isAuthenticated, doLogin, doSignup, logout };
+  const doLoginByCurrentUser = (data) => dispatch(loginSuccess(data));
+
+  return { accessToken, user, isAuthenticated, doLogin, doSignup, logout, doLoginByCurrentUser };
 }

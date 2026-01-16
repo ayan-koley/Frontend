@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { Box, AppBar, Toolbar, Typography, Button } from "@mui/material";
 import ThemeToggle from "../components/ThemeToggle.jsx";
+import { useAuth } from "../hooks/useAuth.js";
 
 export default function Home() {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   return (
     <div className="max-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 dark:bg-white text-white dark:text-blue-600">
@@ -70,40 +72,65 @@ export default function Home() {
             flexWrap: "wrap",
           }}
         >
-          <Button
-            variant="contained"
-            className="bg-transparent dark:bg-white dark:text-black"
-            sx={{
-              px: 4,
-              py: 1.5,
-              background: "black",
-              fontSize: "1rem",
-              fontWeight: 600,
-              textTransform: "none",
-            }}
-            onClick={() => navigate("/signup")}
-          >
-            Start for Free →
-          </Button>
-          <Button
-            variant="outlined"
-            sx={{
-              color: "#14b8a6",
-              borderColor: "#14b8a6",
-              px: 4,
-              py: 1.5,
-              fontSize: "1rem",
-              fontWeight: 600,
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: "rgba(20, 184, 166, 0.1)",
-                borderColor: "#14b8a6",
-              },
-            }}
-            onClick={() => navigate("/login")}
-          >
-            Sign in
-          </Button>
+          {
+            isAuthenticated ? (
+              <Button
+                  variant="contained"
+                  className="bg-transparent dark:bg-white dark:text-black"
+                  sx={{
+                    px: 4,
+                    py: 1.5,
+                    background: "black",
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                    textTransform: "none",
+                  }}
+                  onClick={() => navigate("/dashboard")}
+                >
+                Dashboard
+              </Button>
+            ) : (
+              <>
+                <Button
+                  variant="contained"
+                  className="bg-transparent dark:bg-white dark:text-black"
+                  sx={{
+                    px: 4,
+                    py: 1.5,
+                    background: "black",
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                    textTransform: "none",
+                  }}
+                  onClick={() => navigate("/signup")}
+                >
+                Start for Free →
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{
+                  color: "#14b8a6",
+                  borderColor: "#14b8a6",
+                  px: 4,
+                  py: 1.5,
+                  fontSize: "1rem",
+                  fontWeight: 600,
+                  textTransform: "none",
+                  "&:hover": {
+                    backgroundColor: "rgba(20, 184, 166, 0.1)",
+                    borderColor: "#14b8a6",
+                  },
+                }}
+                onClick={() => navigate("/login")}
+              >
+                Sign in
+              </Button>
+              </>
+            )
+          }
+
+
+          
         </Box>
       </Box>
     </div>

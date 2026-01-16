@@ -10,14 +10,14 @@ function setMockUrls(urls) {
 }
 
 export async function createUrl({ original, alias }) {
-  const { data } = await api.post("/api/v1/shorten/urls", { originalUrl: original }, {
+  const { data } = await api.post("/shorten/urls", { originalUrl: original }, {
     withCredentials: true
   });
   return data.data.url;
 }
 
 export async function listUrls() {
-  const { data } = await api.get("/api/v1/shorten/urls", {
+  const { data } = await api.get("/shorten/urls", {
     withCredentials: true
   });
   return data.data.urls;
