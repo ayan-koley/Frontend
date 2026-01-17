@@ -10,17 +10,42 @@ function setMockUrls(urls) {
 }
 
 export async function createUrl({ original, alias }) {
-  const { data } = await api.post("/shorten/urls", { originalUrl: original }, {
-    withCredentials: true
-  });
+  const { data } = await api.post(
+    "/shorten/urls",
+    { originalUrl: original },
+    {
+      withCredentials: true,
+    }
+  );
   return data.data.url;
 }
 
 export async function listUrls() {
   const { data } = await api.get("/shorten/urls", {
-    withCredentials: true
+    withCredentials: true,
   });
   return data.data.urls;
+}
+
+export async function getUrlAnalytics(id) {
+  const { data } = await api.get(`/urls/${id}/analytics`, {
+    withCredentials: true,
+  });
+  return data.data;
+}
+
+export async function getDailyAnalytics(id) {
+  const { data } = await api.get(`/urls/${id}/analytics/daily`, {
+    withCredentials: true,
+  });
+  return data.data || [];
+}
+
+export async function getClickHistory(id) {
+  const { data } = await api.get(`/urls/${id}/clicks`, {
+    withCredentials: true,
+  });
+  return data.data || [];
 }
 
 export async function deleteUrl(id) {

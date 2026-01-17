@@ -184,14 +184,14 @@ export default function Dashboard() {
         </div>
       </Paper>
 
-      <Paper sx={{ p: 3 }} elevation={0}>
+      {/* <Paper sx={{ p: 3 }} elevation={0}>
         <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
           Analytics
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Clicks per day chart coming soon…
         </Typography>
-      </Paper>
+      </Paper> */}
 
       <Snackbar
         open={Boolean(error)}

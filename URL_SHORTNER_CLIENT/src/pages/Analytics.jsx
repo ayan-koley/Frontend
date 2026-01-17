@@ -20,12 +20,12 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-// import {
-  // getClickHistory,
-//   getDailyAnalytics,
-//   getUrlAnalytics,
-//   listUrls,
-// } from "../services/url.service.js";
+import {
+  getClickHistory,
+  getDailyAnalytics,
+  getUrlAnalytics,
+  listUrls,
+} from "../services/url.service.js";
 
 const formatDateTime = (value) => new Date(value).toLocaleString();
 
@@ -124,33 +124,40 @@ export default function Analytics() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   const run = async () => {
-  //     if (!selectedId) return;
-  //     setLoading(true);
-  //     setError("");
-  //     try {
-  //       const [s, d, c] = await Promise.all([
-  //         getUrlAnalytics(selectedId),
-  //         getDailyAnalytics(selectedId),
-  //         getClickHistory(selectedId),
-  //       ]);
-  //       setSummary(s);
-  //       setDaily(d || []);
-  //       setClicks(c || []);
-  //     } catch (err) {
-  //       setError(err.message || "Unable to load analytics");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   run();
-  // }, [selectedId]);
+  const loadAnalytics = async (id) => {
+    const targetId = id || selectedId;
+    if (!targetId) return;
+    setLoading(true);
+    setError("");
+    try {
+      const [s, d, c] = await Promise.all([
+        getUrlAnalytics(targetId),
+        getDailyAnalytics(targetId),
+        getClickHistory(targetId),
+      ]);
+      setSummary(s);
+      setDaily(d || []);
+      setClicks(c || []);
+    } catch (err) {
+      setError(err.message || "Unable to load analytics");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadAnalytics();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedId]);
 
   const selectedUrl = useMemo(
     () => urls.find((u) => (u._id || u.id) === selectedId),
     [urls, selectedId]
   );
+
+  const todayClicks = useMemo(() => {
+    return daily.totalClicksToday;
+  }, [daily]);
 
   const hasData = daily?.length > 0 || clicks?.length > 0 || summary;
 
@@ -168,14 +175,14 @@ export default function Analytics() {
               Analytics
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Routes used: /:id/analytics, /:id/clicks, /:id/analytics/daily
+              Routes used: /api/v1/urls/:id/analytics, /clicks, /analytics/daily
             </Typography>
           </div>
           <Stack direction="row" spacing={1}>
             <Button
               variant="outlined"
               size="small"
-              onClick={() => selectedId && setSelectedId(selectedId)}
+              onClick={() => loadAnalytics()}
             >
               Refresh
             </Button>
@@ -227,6 +234,17 @@ export default function Analytics() {
           <Grid container spacing={2}>
             <Grid item xs={12} md={3}>
               <StatCard
+                label="Today's Clicks"
+                value={todayClicks ?? "–"}
+                helper={
+                  summary?.lastClickedAt
+                    ? `Last click ${formatAgo(summary.lastClickedAt)}`
+                    : "Last 24h"
+                }
+              />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <StatCard
                 label="Total Clicks"
                 value={summary?.totalClicks ?? "–"}
                 helper={
@@ -236,7 +254,7 @@ export default function Analytics() {
                 }
               />
             </Grid>
-            <Grid item xs={12} md={3}>
+            {/* <Grid item xs={12} md={3}>
               <StatCard
                 label="Unique Visitors"
                 value={summary?.uniqueVisitors ?? "–"}
@@ -257,8 +275,8 @@ export default function Analytics() {
                 value={summary?.shortCode || "—"}
                 helper={summary?.originalUrl}
               />
-            </Grid>
-            <Grid item xs={12} md={3}>
+            </Grid> */}
+            <Grid item xs={12} md={3.2}>
               <StatCard
                 label="Created"
                 value={
@@ -269,7 +287,7 @@ export default function Analytics() {
             </Grid>
           </Grid>
 
-          <Paper sx={{ p: 3 }} elevation={0}>
+          {/* <Paper sx={{ p: 3 }} elevation={0}>
             <Stack
               direction={{ xs: "column", sm: "row" }}
               justifyContent="space-between"
@@ -340,7 +358,7 @@ export default function Analytics() {
                 No click events recorded for this URL yet.
               </Typography>
             )}
-          </Paper>
+          </Paper> */}
         </Stack>
       ) : (
         <Paper sx={{ p: 3 }} elevation={0}>
